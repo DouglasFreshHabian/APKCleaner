@@ -40,7 +40,7 @@ Unlike simple debloat scripts, APKCleaner validates projected system state befor
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/APKCleaner.git
+git clone https://github.com/DouglasFreshHabian/APKCleaner.git
 cd APKCleaner
 chmod +x apkclean.sh
 ```
@@ -73,10 +73,10 @@ With filter:
 
 ---
 
-### Apply With APK Backup (Recommended)
+### Apply With APK Extraction (Recommended)
 
 ```bash
-./apkclean.sh --apply --backup
+./apkclean.sh --apply --extract
 ```
 
 This will:
@@ -106,9 +106,9 @@ This will:
 
 ---
 
-### Verify Latest Backup
+### Verify Latest Backup(Extraction)
 
-Automatically verifies integrity of the most recent backup bundle:
+Automatically verifies integrity of the most recent extraction bundle:
 
 ```bash
 ./apkclean.sh --verify
@@ -116,9 +116,9 @@ Automatically verifies integrity of the most recent backup bundle:
 
 ---
 
-### Install From Latest Backup
+### Install From Latest Extraction
 
-Automatically restores all packages from the most recent backup bundle:
+Automatically restores all packages from the most recent extraction bundle:
 
 ```bash
 ./apkclean.sh --install
@@ -142,9 +142,9 @@ Automatically restores all packages from the most recent backup bundle:
 
 ---
 
-## 📂 Backup Structure
+## 📂 Backup(Extraction) Structure
 
-When using `--backup`, backups are stored as:
+When using `--extract`, extractions are stored as:
 
 ```
 apk_backups/YYYY-MM-DD_HH-MM-SS/
@@ -205,7 +205,7 @@ This makes it suitable for both daily-driver devices and controlled lab environm
 APKCleaner uses ADB to uninstall packages for the specified user.
 Removing system packages can break device functionality if done carelessly.
 
-Use `--backup` whenever possible.
+Use `--extract` whenever possible.
 
 You are responsible for changes made to your device.
 

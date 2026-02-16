@@ -174,7 +174,7 @@ backup_apks() {
     echo -e "${BLUE}Backing up APKs to $BACKUP_DIR${NC}"
     echo ""
 
-    while read -r pkg; do
+    while IFS= read -r pkg <&3; do
         [[ -z "$pkg" ]] && continue
 
         echo -e "${YELLOW}Backing up $pkg${NC}"
@@ -210,7 +210,7 @@ backup_apks() {
 
         echo ""
 
-    done < "$REVIEW_FILE"
+    done 3< "$REVIEW_FILE"
 
     echo -e "${BLUE}Generating global restore bundle...${NC}"
     echo ""
@@ -313,8 +313,8 @@ show_help() {
     echo ""
     echo -e "${GREEN}Modifiers:${NC}"
     echo -e "  ${YELLOW}--dry-run${NC}     Simulate removal"
-    echo -e "  ${YELLOW}--force${NC}       Bypass guardrails"
-    echo -e "  ${YELLOW}--backup${NC}      Backup APKs before removal"
+    echo -e "  ${YELLOW}--force${NC}       Bypass any guardrails"
+    echo -e "  ${YELLOW}--extract${NC}     Extract APKs before removal"
     echo ""
     echo -e "${GREEN}Device Selection:${NC}"
     echo -e "  ${YELLOW}-s DEVICE_ID${NC}  Specify target device"
@@ -337,7 +337,7 @@ main() {
             --dry-run) DRY_RUN=1; shift ;;
             --force) FORCE=1; shift ;;
             --filter) FILTER="$2"; shift 2 ;;
-            --backup) BACKUP_APKS=1; shift ;;
+            --extract) BACKUP_APKS=1; shift ;;
             --help|-h) show_help; exit 0 ;;
             --version) echo -e "${BLUE}${TOOL_NAME} v${VERSION}${NC}"; exit 0 ;;
             *)
@@ -416,14 +416,14 @@ main() {
             read -rp "Apply removal of packages in $REVIEW_FILE? (y/N): " ans
             [[ "$ans" =~ ^[Yy]$ ]] || exit 0
 
-            while read -r pkg; do
+            while IFS= read -r pkg <&3; do
                 echo -e "${YELLOW}Removing $pkg${NC}"
                 if [[ "$DRY_RUN" -eq 0 ]]; then
                     adb -s "$DEVICE_ID" shell pm uninstall --user "$USER_ID" "$pkg"
                 else
                     echo -e "${BLUE}[DRY RUN] Would remove $pkg${NC}"
                 fi
-            done < "$REVIEW_FILE"
+            done 3< "$REVIEW_FILE"
 
             echo -e "${GREEN}Done.${NC}"
             ;;
@@ -434,10 +434,10 @@ main() {
                 exit 1
             }
 
-            while read -r pkg; do
+            while IFS= read -r pkg <&3; do
                 echo "Restoring $pkg"
                 adb -s "$DEVICE_ID" shell cmd package install-existing "$pkg"
-            done < "$REVIEW_FILE"
+            done 3< "$REVIEW_FILE"
 
             echo "Restore complete."
             ;;

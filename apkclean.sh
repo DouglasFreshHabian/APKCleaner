@@ -171,13 +171,13 @@ backup_apks() {
 
     mkdir -p "$BACKUP_DIR"
 
-    echo -e "${BLUE}Backing up APKs to $BACKUP_DIR${NC}"
+    echo -e "${BLUE}Extracting APKs to $BACKUP_DIR${NC}"
     echo ""
 
     while IFS= read -r pkg <&3; do
         [[ -z "$pkg" ]] && continue
 
-        echo -e "${YELLOW}Backing up $pkg${NC}"
+        echo -e "${YELLOW}Extracting $pkg${NC}"
 
         PKG_DIR="$BACKUP_DIR/$pkg"
         mkdir -p "$PKG_DIR"
@@ -285,7 +285,7 @@ EOF
     cd - >/dev/null || exit 1
 
     echo ""
-    echo -e "${GREEN}APK backup complete.${NC}"
+    echo -e "${GREEN}Extraction complete.${NC}"
     echo ""
 }
 
@@ -304,8 +304,8 @@ show_help() {
     echo -e "  ${YELLOW}--apply${NC}       Remove all selected packages"
     echo -e "  ${YELLOW}--edit${NC}        Edit entries in review list"
     echo -e "  ${YELLOW}--restore${NC}     Restore from review list"
-    echo -e "  ${YELLOW}--verify${NC}      Verify latest backup integrity"
-    echo -e "  ${YELLOW}--install${NC}     Install from latest backup"
+    echo -e "  ${YELLOW}--verify${NC}      Verify latest Extraction integrity"
+    echo -e "  ${YELLOW}--install${NC}     Install from latest extraction"
     echo -e "  ${YELLOW}--analyze${NC}     Post-debloat system analysis"
     echo ""
     echo -e "${GREEN}Filters:${NC}"
@@ -443,12 +443,12 @@ main() {
             ;;
 
         verify)
-            echo -e "${BLUE}Running verification on latest backup...${NC}"
+            echo -e "${BLUE}Running verification on latest extraction...${NC}"
 
             LATEST_BACKUP=$(ls -dt apk_backups/* 2>/dev/null | head -n1)
 
             if [[ -z "${LATEST_BACKUP:-}" ]]; then
-                echo -e "${RED}No backup directories found.${NC}"
+                echo -e "${RED}No directories found.${NC}"
                 exit 1
             fi
 
@@ -457,19 +457,19 @@ main() {
                 exit 1
             fi
 
-            echo -e "${GREEN}Using backup:${NC} $LATEST_BACKUP"
+            echo -e "${GREEN}Using extraction:${NC} $LATEST_BACKUP"
             echo ""
 
             ( cd "$LATEST_BACKUP" && ./verify.sh )
             ;;
 
         install)
-            echo -e "${BLUE}Running install from latest backup...${NC}"
+            echo -e "${BLUE}Running install from latest extraction...${NC}"
 
             LATEST_BACKUP=$(ls -dt apk_backups/* 2>/dev/null | head -n1)
 
             if [[ -z "${LATEST_BACKUP:-}" ]]; then
-                echo -e "${RED}No backup directories found.${NC}"
+                echo -e "${RED}No directories found.${NC}"
                 exit 1
             fi
 
@@ -478,7 +478,7 @@ main() {
                 exit 1
             fi
 
-            echo -e "${GREEN}Using backup:${NC} $LATEST_BACKUP"
+            echo -e "${GREEN}Using extraction:${NC} $LATEST_BACKUP"
             echo ""
 
             read -rp "Proceed with full restore? (y/N): " ans

@@ -1,8 +1,8 @@
 # 📦 APKCleaner
 
-A guarded Android debloating utility with APK backup, integrity hashing, and full rollback lifecycle support.
+A guarded Android debloating utility with APK extraction, integrity hashing, and full rollback lifecycle support.
 
-APKCleaner safely removes unwanted Android packages using ADB — while automatically backing up APKs, generating atomic restore bundles, and verifying integrity with SHA256 hashes.
+APKCleaner safely removes unwanted Android packages using ADB — while automatically extracting APKs, generating atomic restore bundles, and verifying integrity with SHA256 hashes.
 
 Unlike simple debloat scripts, APKCleaner validates projected system state before removal and provides full rollback capability without requiring a factory reset.
 
@@ -106,7 +106,7 @@ This will:
 
 ---
 
-### Verify Latest Backup(Extraction)
+### Verify Latest Extraction
 
 Automatically verifies integrity of the most recent extraction bundle:
 
@@ -142,7 +142,7 @@ Automatically restores all packages from the most recent extraction bundle:
 
 ---
 
-## 📂 Backup(Extraction) Structure
+## 📂 Extraction Structure
 
 When using `--extract`, extractions are stored as:
 
@@ -222,13 +222,6 @@ APKCleaner is built around:
 
 It is not a blind debloat script.
 It is a reversible Android package management tool.
-
----
-
-## 📜 License
-
-MIT License (recommended)
-Or choose the license appropriate for your use case.
 
 ---
 ## ☕ Support This Project

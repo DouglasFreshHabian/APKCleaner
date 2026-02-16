@@ -10,7 +10,7 @@ Unlike simple debloat scripts, APKCleaner validates projected system state befor
 
 ## 🔥 Features
 
-* 🔍 JSON-based package filtering (`recommended`, `advanced`, `oem`)
+* 🔍 JSON-based package filtering (`recommended`, `advanced`, `oem`, `third-party`)
 * 🛡 Critical package protection (prevents removal of core system apps)
 * 🧠 Intent-based projected validation (ensures active launcher survives removal)
 * 📦 Automatic APK extraction before uninstall
@@ -22,6 +22,7 @@ Unlike simple debloat scripts, APKCleaner validates projected system state befor
 * 🚨 Force override option
 * 📊 Post-debloat analysis mode
 * 🎨 Colorized CLI interface
+* 📝 New listing modes to view all packages or only third-party packages (`--list`)
 
 ---
 
@@ -61,6 +62,22 @@ With filter:
 
 ```bash
 ./apkclean.sh --scan --filter advanced
+```
+
+---
+
+### List Installed Packages
+
+List all installed packages:
+
+```bash
+./apkclean.sh --list
+```
+
+List only third-party packages:
+
+```bash
+./apkclean.sh --list --filter third-party
 ```
 
 ---
@@ -108,7 +125,7 @@ This will:
 
 ### Verify Latest Extraction
 
-Automatically verifies integrity of the most recent extraction bundle:
+Automatically verifies the integrity of the most recent extraction bundle:
 
 ```bash
 ./apkclean.sh --verify
@@ -147,7 +164,7 @@ Automatically restores all packages from the most recent extraction bundle:
 When using `--extract`, extractions are stored as:
 
 ```
-apk_backups/YYYY-MM-DD_HH-MM-SS/
+Extraction/YYYY-MM-DD_HH-MM-SS/
   com.package.one/
     base.apk
     split_config.arm64_v8a.apk
@@ -163,27 +180,13 @@ All packages are restored atomically using a single install script.
 
 ---
 
-## 🔁 Manual Restore (Optional)
+## 🔁 Restore (Sytem Packages)
 
-Navigate into a backup directory:
-
-```bash
-cd apk_backups/TIMESTAMP
-```
-
-Verify integrity:
+This restores all system packages removed:
 
 ```bash
-./verify.sh
+./apkclean.sh --restore
 ```
-
-Restore all packages:
-
-```bash
-./install.sh
-```
-
-Split APKs are automatically handled via `adb install-multiple`.
 
 ---
 
@@ -202,8 +205,7 @@ This makes it suitable for both daily-driver devices and controlled lab environm
 
 ## ⚠️ Disclaimer
 
-APKCleaner uses ADB to uninstall packages for the specified user.
-Removing system packages can break device functionality if done carelessly.
+APKCleaner uses ADB to uninstall packages for the specified user. Removing system packages can break device functionality if done carelessly.
 
 Use `--extract` whenever possible.
 
@@ -223,7 +225,6 @@ APKCleaner is built around:
 It is not a blind debloat script.
 It is a reversible Android package management tool.
 
----
 ## ☕ Support This Project
 
 If **APKCleaner™** helps you manage and safely debloat your Android devices, consider supporting continued development:

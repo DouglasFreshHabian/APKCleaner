@@ -27,7 +27,7 @@ Unlike simple debloat scripts, APKCleaner validates projected system state befor
 
 ## 🧩 Requirements
 
-* Linux or macOS
+* Linux
 * `adb`
 * `jq`
 * `sha256sum`

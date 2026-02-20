@@ -2,9 +2,13 @@
 
 A guarded Android debloating utility with APK extraction, integrity hashing, and full rollback lifecycle support.
 
-APKCleaner safely removes unwanted Android packages using ADB — while automatically extracting APKs, generating atomic restore bundles, and verifying integrity with SHA256 hashes.
+APKCleaner safely removes unwanted Android packages using ADB, while automatically extracting APKs, generating atomic restore bundles, and verifying integrity with SHA256 hashes. Unlike simple debloat scripts, APKCleaner validates projected system state before removal and provides full rollback capability without requiring a factory reset.
 
-Unlike simple debloat scripts, APKCleaner validates projected system state before removal and provides full rollback capability without requiring a factory reset.
+---
+
+## ⚠️ Disclaimer
+
+Before using this debloater, make sure you fully sign out of any important accounts (Google, work profiles, banking apps, social media, etc.) and confirm that account syncing has completed. Removing system or user apps can trigger data loss, token invalidation, or device protection locks if accounts are still active. You are responsible for your device — take a few extra minutes to secure your data first.
 
 ---
 
@@ -200,16 +204,6 @@ APKCleaner prevents common soft-brick scenarios by:
 * Providing atomic rollback capability
 
 This makes it suitable for both daily-driver devices and controlled lab environments.
-
----
-
-## ⚠️ Disclaimer
-
-APKCleaner uses ADB to uninstall packages for the specified user. Removing system packages can break device functionality if done carelessly.
-
-Use `--extract` whenever possible.
-
-You are responsible for changes made to your device.
 
 ---
 

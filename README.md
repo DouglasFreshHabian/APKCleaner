@@ -6,12 +6,6 @@ APKCleaner safely removes unwanted Android packages using ADB, while automatical
 
 ---
 
-## ⚠️ Disclaimer
-
-Before using this debloater, make sure you fully sign out of any important accounts (Google, work profiles, banking apps, social media, etc.) and confirm that account syncing has completed. Removing system or user apps can trigger data loss, token invalidation, or device protection locks if accounts are still active. You are responsible for your device — take a few extra minutes to secure your data first.
-
----
-
 ## 🔥 Features
 
 * 🔍 JSON-based package filtering (`recommended`, `advanced`, `oem`, `third-party`)
@@ -218,6 +212,14 @@ APKCleaner is built around:
 
 It is not a blind debloat script.
 It is a reversible Android package management tool.
+
+---
+
+## ⚠️ Disclaimer
+
+Before using this debloater, make sure you fully sign out of any important accounts (Google, work profiles, banking apps, social media, etc.) and confirm that account syncing has completed. Removing system or user apps can trigger data loss, token invalidation, or device protection locks if accounts are still active. You are responsible for your device — take a few extra minutes to secure your data first.
+
+---
 
 ## ☕ Support This Project
 
